@@ -1,0 +1,133 @@
+#include<iostream>
+using namespace std;
+
+struct node
+{
+    int data;
+    node *next;
+};
+node *head=NULL;
+node* getnode()
+{
+    int data1;
+    node* newnode=new node;
+    cout<<"Enter data : ";
+    cin>>data1;
+    newnode->data=data1;
+    newnode->next=NULL;
+}
+
+//Create Slinked lidt
+
+void createlist(int n)
+{
+    node *newnode,*temp;
+    for(int i=0;i<n;i++)
+    {
+    newnode=getnode();
+    temp=head;
+    if(head==NULL)
+    {
+        head=newnode;
+        newnode->next=head;
+
+    }
+    else{
+    while(temp->next!=head)
+    {
+
+    temp=temp->next;
+    }
+    temp->next=newnode;
+    newnode->next=head;
+
+    }
+
+
+    }
+
+    cout<<"Elements are Inserted Successfully. "<<endl;
+}
+
+void display(node *head)
+{
+   node *temp;
+   temp=head;
+   if(head==NULL)
+   {
+       cout<<"Linklist is Empty "<<endl;
+   }
+   else
+   {
+       cout<<"Linked List Elements Are : "<<endl;
+       do
+       {
+           cout<<" -> "<<temp->data;
+           temp=temp->next;
+       }while(temp!=head);
+       cout<<endl;
+
+   }
+}
+
+node* head_loop(node* head)
+{
+    node *fast,*slow;
+    slow=fast=head;
+
+    int c=0,count=0;
+    while(fast && fast->next)
+    {
+        slow=slow->next;
+        fast=fast->next->next;
+        if(slow==fast)
+        {
+            c++;
+            break;
+        }
+    }
+      if(c)
+    {
+        count=1;
+        fast=fast->next;
+        while(slow!=fast)
+        {
+           
+            fast=fast->next;
+            count++;
+        }
+         cout<<"\nLenth of loop is : "<<count;
+    }
+    if(c)
+    {
+        slow=head;
+        while(slow!=fast)
+        {
+           
+            fast=fast->next;
+            slow=slow->next;
+        }
+     
+        return slow;
+    }
+    return NULL;
+}
+
+   int main()
+   {
+
+       int n;
+       cout<<"Enter no. of node ";
+       cin>>n;
+       createlist( n);
+       display(head);
+       node *ans=head_loop(head);
+       cout<<"\nHead of Loop is : "<<ans->data;
+
+
+
+
+
+   }
+
+
