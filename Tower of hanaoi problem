@@ -1,0 +1,23 @@
+#include<iostream>
+
+using namespace std;
+towerofhanaoi(int n,string sourse,string destination,string auxilary)
+{
+    if(n==1){
+        cout<<"Move Disk "<<n<<" from "<< sourse <<" to "<< destination<<endl;
+         return 0;
+    }
+    towerofhanaoi(n-1,sourse,auxilary,destination);
+        cout<<"Move Disk "<<n<<" from "<<sourse<<" to "<<destination<<endl;
+
+    towerofhanaoi(n-1,auxilary,destination,sourse);
+}
+int main()
+{
+
+    int n;
+     cout<<"Enter number of disk :-";
+     cin>>n;
+     towerofhanaoi(n,"ROD-1","ROD-2","ROD-3");
+     return 0;
+}
